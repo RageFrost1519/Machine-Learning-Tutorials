@@ -1,0 +1,30 @@
+#the normal equation
+#linear regression model: y=a0+a1x1+....anxn
+
+#y=AX A=[a0,a1,...an] X=[1,x1,...xn]
+
+#the normal eqn is a generalized form of the best fitting line of any linear regression model
+# A=(X^(T).X)^(-1).X^(T).y 
+# where A is the value of parameters that minimizes cost function
+# y is the vector of target values containing y(1) to y(m)
+
+#we will implement this using the housing price dataset
+
+import pandas as pd
+import numpy as np
+
+
+#loading training data in numpy arrays
+data=pd.read_csv('Housing_Price_Data.csv',usecols=['area','bedrooms','bathrooms','stories']) 
+data=data.to_numpy()
+prices=pd.read_csv('Housing_Price_Data.csv',usecols=['price'])
+prices=prices.to_numpy()
+
+data=np.c_[np.ones((data.shape[0],1)),data] #adding x0=1 to each training set
+
+A=np.linalg.inv(data.T.dot(data)).dot(data.T).dot(prices)
+
+#using A to predict the price of a house
+
+X=np.array([[1,3850,3,1,2]]) #the first element 1 is added to 
+print(A.T.dot(X.T))
