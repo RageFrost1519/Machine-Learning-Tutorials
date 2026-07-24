@@ -10,11 +10,12 @@
 
 import pandas as pd
 import numpy as np
+import time
 
-df=pd.read_csv('housing_price_data.csv')
-x=pd.read_csv('housing_price_data.csv',usecols=['SquareFeet','Bedrooms','Bathrooms']) 
+df=pd.read_csv('housing_price_data - Copy.csv')
+x=pd.read_csv('housing_price_data - Copy.csv',usecols=['SquareFeet','Bedrooms','Bathrooms']) 
 x=x.to_numpy()
-y=pd.read_csv('housing_price_data.csv',usecols=['Price'])
+y=pd.read_csv('housing_price_data - Copy.csv',usecols=['Price'])
 y=y.to_numpy().flatten()
 
 x_mean = np.mean(x, axis=0)
@@ -29,9 +30,13 @@ m=x.shape[0]
 
 
 A=np.zeros(x.shape[1])   #all parameters initialized to 0
+start_time=time.time()
+
 
 for i in range(n_iterations):
     g=(2/m)*(x.T)@(x@A-y)
     A=A-eta*g
 
-print(A)
+print(time.time()-start_time)
+
+#this is batch gradient descent as it uses the whole training set to compute parameters
