@@ -15,9 +15,10 @@ import numpy as np
 
 
 #loading training data in numpy arrays
-data=pd.read_csv('Housing_Price_Data.csv',usecols=['area','bedrooms','bathrooms','stories']) 
+df=pd.read_csv('housing_price_data.csv')
+data=pd.read_csv('housing_price_data.csv',usecols=['SquareFeet','Bedrooms','Bathrooms']) 
 data=data.to_numpy()
-prices=pd.read_csv('Housing_Price_Data.csv',usecols=['price'])
+prices=pd.read_csv('housing_price_data.csv',usecols=['Price'])
 prices=prices.to_numpy()
 
 data=np.c_[np.ones((data.shape[0],1)),data] #adding x0=1 to each training set
@@ -26,5 +27,6 @@ A=np.linalg.inv(data.T.dot(data)).dot(data.T).dot(prices)
 
 #using A to predict the price of a house
 
-X=np.array([[1,3850,3,1,2]]) #the first element 1 is added to 
+X=np.array([[1,1684,4,3]]) #the first element 1 is added to 
 print(A.T.dot(X.T))
+
