@@ -10,6 +10,10 @@ data=pd.read_csv('housing.csv')
 
 ## in this file, we will implement a test data generating code which randomly selects test data
 
+
+data['income_cat']=np.ceil(data['median_income']/1.5)
+data['income_cat'].where(data['income_cat']<5,5.0,inplace=True)
+
 def split_train_test(data,test_ratio):
     shuffled_indices=np.random.permutation(len(data))
     test_set_size=int(len(data)*test_ratio)
@@ -35,5 +39,5 @@ def split_train_test_by_id(data,test_ratio,id_column,hash=hashlib.md5):
 data_with_id=data.reset_index()
 train_set0,test_set0=split_train_test_by_id(data_with_id,0.2,"index")
 
-print(train_set.head())
-print(train_set0.head())
+print(data['income_cat'].value_counts()/len(data))
+print(train_set['income_cat'].value_counts()/len(train_set))
