@@ -20,6 +20,14 @@ class CombinedAttributesAdder(BaseEstimator,TransformerMixin):
         else:
             return np.c_[X,rooms_per_household,population_per_household]
 
+class DataFrameSelector(BaseEstimator, TransformerMixin):  ## selects some particular data from the dataset to pass it ahead in the pipeline
+    def __init__(self, attribute_names):
+        self.attribute_names = attribute_names
+    def fit(self, X, y=None):
+        return self
+    def transform(self, X):
+        return X[self.attribute_names].values
+
 data=pd.read_csv('housing.csv')  
 attr_adder=CombinedAttributesAdder(add_bedrooms_per_room=True)
 data_extended=attr_adder.transform(data.values)
