@@ -47,7 +47,16 @@ class SplitData():
         X_train, Y_train = X_train[shuffle_index], Y_train[shuffle_index]
         
         return X_train, Y_train, X_test, Y_test
+    
+    def splitData(self):
+        x = self.data["data"]
+        # The .npz file already stores labels as integers, so we just ensure it's uint8
+        y = self.data["target"].astype(np.uint8)
+                
+        X_train, Y_train = x[:self.train_size], y[:self.train_size]
+        X_test, Y_test = x[self.train_size:], y[self.train_size:]
 
+        return X_train, Y_train, X_test, Y_test
 
 if __name__ == "__main__":
     # Test our new, much faster local loader
