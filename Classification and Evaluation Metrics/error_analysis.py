@@ -27,7 +27,10 @@ conf_mx=confusion_matrix(y_train,y_train_pred)
 print(conf_mx)
 
 import matplotlib.pyplot as plt
-import matplotlib
 
+row_sums=conf_mx.sum(axis=1,keepdims=True)
+norm_conf_mx=conf_mx/row_sums
+
+np.fill_diagonal(norm_conf_mx,0)
 plt.matshow(conf_mx,cmap=plt.cm.gray)
 plt.show()
