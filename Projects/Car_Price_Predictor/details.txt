@@ -1,0 +1,22 @@
+This is a linear regression based ML model used to predict the prices of used cars based on the following factors:
+1. Brand
+2. Model 
+3. Year of manufacturing
+4. Age of the car
+5. Distance Driven in km
+6. Transmission (manual or automatic)
+7. Owner (first or second)
+8. Fuel Type
+9. Posted Date
+
+Source of Data: https://www.kaggle.com/datasets/mohitkumar282/used-car-dataset
+
+The data has 9582 rows. For the training of the model we will consider 80% of the data (7666 instances) and the remaining 20%
+(1916 instances) will be used for testing of the model.
+
+Since Posted Date for most of the cars is nov-24 it is not a good measure so we will drop it.
+
+The dataset does not contain any missing values so we don't have to worry about those.
+
+The askedPrice column is in string format we also need to convert it to integer format.
+
